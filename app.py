@@ -3,7 +3,6 @@ from flask_restful import Api, Resource, marshal_with, abort
 from flask_sqlalchemy import SQLAlchemy
 from request_parsers import *
 from serializers import *
-from models import *
 import datetime
 
 app = Flask(__name__)
@@ -12,6 +11,25 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 thirty_one_days_ago = datetime.datetime.now() - datetime.timedelta(31)
+
+class PeopleTable(db.Model):
+
+    __tablename__ = 'people'
+
+    person_id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String)
+    last_name = db.Column(db.String)
+
+
+class MessagesTable(db.Model):
+
+    __tablename__ = 'messages'
+
+    message_id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer)
+    recipient_id = db.Column(db.Integer)
+    message = db.Column(db.String)
+    timestamp = db.Column(db.DateTime(timezone=True))
 
 
 class People(Resource):

@@ -11,5 +11,5 @@ messages_serializer = {
     "sender_id": fields.Integer,
     "recipient_id": fields.Integer,
     "message": fields.String,
-    "timestamp": fields.DateTime
+    "timestamp": fields.String
 }

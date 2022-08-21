@@ -11,3 +11,13 @@ Once in the virtual environment, running
 will install the dependencies needed to successfully run the API locally. Finally, 
 `python app.py`
 will start the API! 
+
+## Database Details
+
+I created two tables in a SQLite database. The first table is called `people` and contains 
+the following columns:
+
+| person_id | first_name | last_name |
+|-----------|------------|-----------|
+|           |            |           |
+

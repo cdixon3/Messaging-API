@@ -32,13 +32,13 @@ The second table is called `messages` and contains the following columns:
 |------------|-----------|--------------|---------|-----------|
 | 1          | 2         | 1            | Text    | Date      |
 
-I separated this information into two tables in case there are multiple people with the
-same first and last name. 
-
 One can see the full contents of `messages` by running the following GET request (note
 that this returns all 300 rows from the database table including messages from more than
 30 days ago):
 ```commandline
 curl http://127.0.0.1:5000/allMessages
 ```
+
+I separated this information into two tables in case there are multiple people with the
+same first and last name. 
 

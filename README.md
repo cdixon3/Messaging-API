@@ -42,3 +42,7 @@ curl http://127.0.0.1:5000/allMessages
 I separated this information into two tables in case there are multiple people with the
 same first and last name. 
 
+## High Level Requirements
+
+*"A short text message can be sent from one user (the sender) to another (the recipient)."*
+

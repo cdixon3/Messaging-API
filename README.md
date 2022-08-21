@@ -19,5 +19,26 @@ the following columns:
 
 | person_id | first_name | last_name |
 |-----------|------------|-----------|
-|           |            |           |
+| 1         | Michael    | Scott     |
+
+One can see the full contents of `people` by running the following GET request:
+```commandline
+curl http://127.0.0.1:5000/people
+```
+
+The second table is called `messages` and contains the following columns:
+
+| message_id | sender_id | recipient_id | message | timestamp |
+|------------|-----------|--------------|---------|-----------|
+| 1          | 2         | 1            | Text    | Date      |
+
+I separated this information into two tables in case there are multiple people with the
+same first and last name. 
+
+One can see the full contents of `messages` by running the following GET request (note
+that this returns all 300 rows from the database table including messages from more than
+30 days ago):
+```commandline
+curl http://127.0.0.1:5000/allMessages
+```
 

@@ -107,9 +107,27 @@ class Messages(Resource):
 
 		return 200
 
+class AllMessages(Resource):
+	@marshal_with(messages_serializer)
+	def get(self):
+		args = messages_get_args.parse_args()
+		messages = MessagesTable.query
+		messages = messages.filter(MessagesTable.message_id == args["message_id"]) \
+			if args["message_id"] \
+			else messages
+		messages = messages.filter(MessagesTable.sender_id == args["sender_id"]) \
+			if args["sender_id"] \
+			else messages
+		messages = messages.filter(MessagesTable.recipient_id == args["recipient_id"]) \
+			if args["recipient_id"] \
+			else messages
+
+		return messages.order_by(MessagesTable.timestamp.desc()).all()
+
 
 api.add_resource(People, "/people")
 api.add_resource(Messages, "/messages")
+api.add_resource(AllMessages, "/allMessages")
 
 if __name__ == "__main__":
 	app.run(debug=True)

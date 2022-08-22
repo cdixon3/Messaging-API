@@ -104,6 +104,9 @@ This test can be run with
 python -m pytest tests/test_messages.py
 ```
 
+With more time, I would have *hopefully* been more thoughtful about edge cases that would
+need to be tested...
+
 - All other High Level Requirements are covered by the information already outlined in 
 `README.md`.
 

@@ -12,6 +12,8 @@ will install the dependencies needed to successfully run the API locally. Finall
 `python app.py`
 will start the API! 
 
+The `database.db` file already contains dummy data, so running `python app.py` should **just work**.
+
 ## Database Details
 
 I created two tables in a SQLite database. The first table is called `people` and contains 
@@ -44,7 +46,7 @@ same first and last name.
 
 ## High Level Requirements
 
--*"A short text message can be sent from one user (the sender) to another (the recipient)."*
+- *"A short text message can be sent from one user (the sender) to another (the recipient)."*
 
 A message can be "sent" from one user (the sender) to another (the recipient) by running the following
 command:
@@ -53,4 +55,57 @@ curl -X POST http://127.0.0.1:5000/messages -H "Content-Type: application/json" 
 ```
 
 All messages were generated using the [Bacon Ipsum API](https://baconipsum.com/api/) 🥓.
+
+- *"Recent messages can be requested for a recipient from a specific sender. By default, only messages from the last 
+30 days should be returned. Additionally, there should be a limit of 100 messages in a response."*
+
+Messages can be retrieved for a recipient from a specific sender by running the following GET request (with 
+`recipient_id` and `sender_id` as parameters):
+
+```commandline
+curl -X GET "http://127.0.0.1:5000/messages?recipient_id=1&sender_id=2"
+```
+
+The messages in the response are ordered by date in descending order.
+
+- *"Recent messages can be requested from all senders. By default, only messages from the last 30 days should 
+be returned. Additionally, there should be a limit of 100 messages in a response."*
+
+Messages can be retrieved for a recipient from **all** senders by running the following GET request:
+
+```commandline
+curl -X GET "http://127.0.0.1:5000/messages?recipient_id=1"
+```
+
+Additionally, messages can be retrieved for all senders (regardless of recipient) with the following 
+GET request:
+
+```commandline
+curl -X GET "http://127.0.0.1:5000/messages"
+```
+
+Once again, the messages in the response are ordered by date in descending order.
+
+- *Include tests and document how to test your API.*
+
+In order to test this API, I needed to generate dummy data. This was done using the 
+code in `generate_data.py`. These data contain messages that are older than 30 days, as well
+as more than 100 messages for certain `recipient_id`/`sender_id` combinations. This allows
+us to test the two constraints outlined above. 
+
+I wrote a basic test in `test_messages.py` that checks that
+
+1. There are no more than 100 messages in the response and
+2. Only messages from the last 30 days are being returned
+
+This test can be run with
+
+```commandline
+python -m pytest tests/test_messages.py
+```
+
+- All other High Level Requirements are covered by the information already outlined in 
+`README.md`.
+
+
 

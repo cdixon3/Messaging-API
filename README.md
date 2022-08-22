@@ -44,5 +44,13 @@ same first and last name.
 
 ## High Level Requirements
 
-*"A short text message can be sent from one user (the sender) to another (the recipient)."*
+-*"A short text message can be sent from one user (the sender) to another (the recipient)."*
+
+A message can be "sent" from one user (the sender) to another (the recipient) by running the following
+command:
+```commandline
+curl -X POST http://127.0.0.1:5000/messages -H "Content-Type: application/json" -d '{"message_id": 301, "sender_id": 1, "recipient_id": 3, "message": "Brisket magna swine turkey anim frankfurter chicken rump tail.", "timestamp": "2022-08-20T15:20:25.335650"}'  
+```
+
+All messages were generated using the [Bacon Ipsum API](https://baconipsum.com/api/) 🥓.
 
